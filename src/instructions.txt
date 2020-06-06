@@ -1,0 +1,127 @@
+for react components... you can render using a functional components or a simple jsx element or class
+
+//for functional components
+
+function ComponentName(props) {
+    // takes props as arguement
+    //props is any data that you want to be used in the component
+    return (
+        <div>
+            // then you render html jsx
+            //using props like this
+            <p>{props.propsname.join(",")}// this assumes props is an array and then just joins them
+        </div>
+    )
+}
+
+//you can pass in default props as so
+ComponentName.defaultProps = {
+    propsname : propsvalue
+}
+
+//also you can require that the props given is of a data type that you want
+//you need to import PropTypes from "prop-types"
+ComponentName.propTypes = {
+    propsname: PropTypes.func.isRequired}
+}// this will check if the propsname given is actually a function
+
+we can pass in the prop when the component is being rendered.
+
+ReactDOM.render(<ComponentName propsname = {propsvalue}/>)
+//propsvalue can be anything really...can be an arrray..object.. functions anything
+// when an object is passed you can us the props in the Component itself
+
+
+you can compose components on a main component and call it many times passing different propsvalue to have the same feel buh different datas
+
+
+
+// using es6 classes for components
+class ComponentName extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state={
+            count: 0,
+            input: ''
+        }
+        //if you are using a method that isn't arrow function you have to bind the this keyword to the function like so
+        this.methodname = this.methodname.bind(this)//then you can now use this in the function you want
+    }
+    //methods
+    onClicked = () => {
+        this.setState(state => ({count:this.state.count + 1}))
+        //this changes the count in the state object and can help you do alot with it 
+    }
+    onChanged = (event) => {
+        this.setState(()=> ({input: event.target.value}))
+        //on changing the input in the input element ....the input state is changed and can be used to be rendered else where
+    }
+    onSubmitted = (event) => {
+        you can do anything when the submit button is clicked
+    }
+    render() {
+        return (
+            <div>
+                //some jSX
+                <p>{this.props.prosname}
+                <button onClick={this.onClicked}>Click me</button>
+                <form onSubmit = {this.onSubmitted}>//when the submit button is clicked the onsubmitted method will do something
+                    <input onChange={this.onChanged} type="text"/>
+                    <input type="submit"/>
+                </form>
+                <h1>{this.state.input}</h1>
+            </div>
+        )
+    }
+}
+
+export default ComponentName;
+
+//for es6 classes ....accessing the props is different
+you use {this.props.propsname}
+
+//using states 
+//youb can use states as an object that sets the contains values or stuffs that you'll use in ur components
+// the state is constructed inside the constructor function....look above(we have a state with input and count properties)
+you can update the state using functions or rather methods using this way
+// look at the onClicked and onChanged and onSubmitted methods above..
+
+//examples
+class MyForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      submit: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      input: event.target.value
+    });
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({
+      submit:this.state.input
+    });
+    document.querySelector("form").remove()
+  }
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+        <input onChange = {this.handleChange}/>
+          <button type='submit'>Submit!</button>
+        </form>
+        <h1 style={{display:none}}>Welcome {this.state.submit}!</h1>
+      </div>
+    );
+  }
+};//this one ....oninput it saves the value of the input to the state of the component..then when the submit button is clicked it stores the value on the state submit value and then outputs it and then removes the form
+
+//next is passing state as props to child component
+
+
