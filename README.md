@@ -1,4 +1,10 @@
 
+wisdomosara.github.io/slide
+
+thats thr link to the site
+
+
+
 this is a project with basic React ideas...
 
 its basically a slider that updates the background image with the current slide
