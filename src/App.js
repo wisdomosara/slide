@@ -12,25 +12,16 @@ class App extends React.Component {
     }
   }
   componentWillMount(){
-    let i = 1;
-        setInterval(() => {
-          let slidee = document.querySelectorAll(".slide");
-          slidee[i - 1].style.display = "none"
-          if(i === 6){
-            i = 0;
-            slidee[i].style.display ="none"
-            for(let q = 0; q < slidee.length; q++) {
-              slidee[q].style.display = "block"
-            }
-
-          }
-          this.setState(state => {
-            return {display : state.images[i]}
-          })
-            
-          i++
-        },4000)
-        
+    
+    setInterval(() => {
+      let i = 0;
+      let removed = this.state.images[i]
+      let imagee = this.state.images.filter(fil => !(this.state.images[0] === fil))
+      imagee.push(removed)
+      this.setState({images : imagee});
+      this.setState({display : imagee[0]})
+      i = i + 1
+    },4000)
   }
   render() { 
     let styles = {
@@ -42,12 +33,12 @@ class App extends React.Component {
       transition: "all 1s ease-out"
     }
     let slideComponents = this.state.images.map(imag => <Slides image={imag}/>)
-    this.state.slider = slideComponents
+    
     
     return (
         <div style={styles}>
           <NavBar />
-            <div className="slidediv">{this.state.slider}</div>
+            <div className="slidediv">{slideComponents}</div>
           <Footer />
         </div>
     );
