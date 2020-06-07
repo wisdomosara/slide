@@ -15,7 +15,7 @@ class Footer extends React.Component {
             }
             return {num : state.num + 1,
             val: state.val + 16.6}}),4000)
-            
+        
     }
 
     render() { 
