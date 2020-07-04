@@ -11,7 +11,7 @@ class App extends React.Component {
         display : "url(images/pic1.jpg)"
     }
   }
-  componentWillMount(){
+  componentDidMount(){
     
     setInterval(() => {
       let i = 0;
@@ -33,7 +33,6 @@ class App extends React.Component {
       transition: "all 1s ease-out"
     }
     let slideComponents = this.state.images.map(imag => <Slides image={imag}/>)
-    
     
     return (
         <div style={styles}>
