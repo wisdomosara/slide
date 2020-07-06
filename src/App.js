@@ -13,7 +13,7 @@ class App extends React.Component {
   }
   componentDidMount(){
     
-    setInterval(() => {
+    this.interval = setInterval(() => {
       let i = 0;
       let removed = this.state.images[i]
       let imagee = this.state.images.filter(fil => !(this.state.images[0] === fil))
