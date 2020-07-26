@@ -1,5 +1,5 @@
 
-wisdomosara.github.io/slide
+https://wisdomosara.github.io/slide
 
 thats thr link to the site
 
