@@ -8,7 +8,7 @@ class Footer extends React.Component {
             val: 16.6
         }
     }
-    componentWillMount(){
+    componentDidMount(){
         setInterval(() => this.setState(state => {
             if (this.state.num == 6) {
                 this.setState({num:1,val:16.6})
