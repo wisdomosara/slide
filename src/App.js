@@ -22,11 +22,19 @@ class App extends React.Component {
       this.setState({display : imagee[0]})
       i = i + 1
     },4000)
-  }
+    window.onload = function()
+ {
+  let preloader = document.querySelector(".preloader");
+  let main = document.querySelector(".main");
+  preloader.classList.add("hide");
+  main.style.display = "block"
+ }  
+}
   render() { 
     let styles = {
       backgroundImage:this.state.display,
       width:"100%",
+      display:"none",
       height:"100vh",
       backgroundSize: "cover",
       backgroundRepeat:"no-repeat",
@@ -34,12 +42,17 @@ class App extends React.Component {
     }
     let slideComponents = this.state.images.map(imag => <Slides image={imag}/>)
     
-    return (
-        <div style={styles}>
-          <NavBar />
-            <div className="slidediv">{slideComponents}</div>
-          <Footer />
-        </div>
+    return (<div>
+              <div className="preloader">
+                <img src="images/Ripple-2.6s-231px.svg" width="100%"></img>
+              </div>
+              <div style={styles} className="main">
+                <NavBar />
+                  <div className="slidediv">{slideComponents}</div>
+                <Footer />
+            </div>
+          </div>
+        
     );
   }
 }
